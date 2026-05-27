@@ -1,10 +1,12 @@
 const express = require('express');
 const axios = require('axios');
+const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3002;
 
 // Middleware para procesar JSON en el body
 app.use(express.json());
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Arreglo en memoria para guardar ventas
 let ordenes = [];
