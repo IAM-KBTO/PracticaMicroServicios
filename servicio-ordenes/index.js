@@ -65,5 +65,5 @@ app.post('/api/ordenes', async (req, res) => {
 });
 
 app.listen(PORT, () => {
-    console.log(`🛒 Servicio de Órdenes corriendo en ${URL_ORDENES}`);
+    console.log(`🛒 Servicio de Órdenes corriendo en el puerto: ${PORT}`);
 });
