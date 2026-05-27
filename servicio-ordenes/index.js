@@ -1,7 +1,7 @@
 const express = require('express');
 const axios = require('axios');
 const app = express();
-const PORT = 3002;
+const PORT = process.env.PORT || 3002;
 
 // Middleware para procesar JSON en el body
 app.use(express.json());
@@ -16,7 +16,8 @@ app.post('/api/ordenes', async (req, res) => {
 
     try {
         // Comunicación HTTP síncrona: Consultar al Servicio de Catálogo
-        const response = await axios.get(`http://localhost:3001/api/libros/${libroId}`);
+        const URL_CATALOGO = process.env.URL_CATALOGO || 'http://localhost:3001';
+        const response = await axios.get(`${URL_CATALOGO}/api/libros/${libroId}`);
         const libro = response.data;
 
         // RETO EXTRA: Verificar si hay stock suficiente
@@ -31,7 +32,7 @@ app.post('/api/ordenes', async (req, res) => {
         // Si todo está bien, calcular total y registrar la orden
         const totalAPagar = libro.precio * cantidad;
         
-        await axios.put(`http://localhost:3001/api/libros/${libroId}/reducir-stock`, {
+        await axios.put(`${URL_CATALOGO}/api/libros/${libroId}/reducir-stock`, {
             cantidad: cantidad
         });
         const nuevaOrden = {
@@ -64,5 +65,5 @@ app.post('/api/ordenes', async (req, res) => {
 });
 
 app.listen(PORT, () => {
-    console.log(`🛒 Servicio de Órdenes corriendo en http://localhost:${PORT}`);
+    console.log(`🛒 Servicio de Órdenes corriendo en ${URL_ORDENES}`);
 });
