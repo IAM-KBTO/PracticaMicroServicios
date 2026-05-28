@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
 const PORT = process.env.PORT || 3001;
+
+app.use(express.json());
 // Base de datos en memoria (incluye el 'stock' para el Reto Extra)
 const libros = [
     { id: 1, titulo: "Clean Architecture", autor: "Robert C. Martin", precio: 450, stock: 10 },
