@@ -73,7 +73,8 @@
                 consola.classList.remove('hidden');
                 
                 // Formatear JSON y cambiar color según el estado
-                jsonPantalla.textContent = JSON.stringify(data, null, 2);
+                // Mostrar SOLO el mensaje de éxito o el mensaje de error
+                jsonPantalla.textContent = data.mensaje || data.error || "Respuesta recibida";
                 
                 if (response.ok) {
                     jsonPantalla.className = "bg-gray-950 text-green-400 p-4 rounded-lg text-xs overflow-x-auto border border-gray-700";
